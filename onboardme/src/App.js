@@ -49,7 +49,7 @@ function App() {
 
 
   const onChange = e => {
-    const {name, value } = e.target
+    const {name, value } = e.target.value
 
     Yup.reach(formSchema, name)
     .validate(value)
@@ -57,9 +57,12 @@ function App() {
       setError({...error, [name]: "" }) //  This is an object
     })
     .catch(err=>{
-      setError({...error, [name]: err.error[0] })
+      console.log(error)
+      setError({...err, [name]: "" }) //  This is an object
+     
+      setForm({...err,  [name]: value}) //The Magic 
     })
-setForm({...form,  [name]: value}) //The Magic 
+
     
   }
 
